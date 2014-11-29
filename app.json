@@ -1,0 +1,9 @@
+{
+  "name": "omnistrate",
+  "description": "example implementation of omniauth with orchestrate",
+  "repository": "https://github.com/tejas-manohar/omnistrate",
+  "logo": "http://siliconflorist.com/wp-content/uploads/2013/05/Orchestrate.jpg",
+  "keywords": ["ruby", "sinatra", "orchestrate", "omniauth", "twitter"],
+  "website": "http://omnistrate.herokuapp.com",
+  "repository": "http://github.com/tejas-manohar/omnistrate"
+}
