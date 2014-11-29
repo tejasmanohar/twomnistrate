@@ -5,5 +5,15 @@
   "logo": "http://siliconflorist.com/wp-content/uploads/2013/05/Orchestrate.jpg",
   "keywords": ["ruby", "sinatra", "orchestrate", "omniauth", "twitter"],
   "website": "http://omnistrate.herokuapp.com",
-  "repository": "http://github.com/tejas-manohar/omnistrate"
+  "repository": "http://github.com/tejas-manohar/omnistrate",
+  "env": {
+    "CONSUMER_KEY": {
+      "description": "twitter public key to generate auth url",
+      "required": true
+    },
+    "CONSUMER_SECRET": {
+      "description": "twitter secret api key",
+      "required": true
+    }
+  },
 }
