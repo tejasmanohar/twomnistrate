@@ -105,7 +105,7 @@ post '/me' do
       users.set(session[:username], { 'phrase' => params[:phrase] })
     end
   end
-  # send browser to phrase listings
+  # send browser to list of users and their phrase
   redirect '/all'
 end
 
@@ -120,6 +120,7 @@ end
 get '/auth/twitter/callback' do
   # change session var to reflect login
   session[:authed] = true
+  # save twitter username from oauth2 response to session variable
   session[:username] = request.env['omniauth.auth']['info']['nickname']
   erb :in
 end
