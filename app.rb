@@ -76,18 +76,15 @@ post '/me' do
   # does user exists in collection
   if users[session[:username]].nil?
     # if user inputted text, create user doc in collection
-    p 'checkpoint 1'
     users.create(session[:username], { 'phrase' => params[:phrase] }) unless params[:phrase].nil?
   else
     if params[:phrase].empty?
       # save selected doc in users
-      p 'checkpoint 2'
       doc = client.get(:users, session[:username])
       # delete doc based on its ref in collection
       client.delete(:users, session[:username], doc.ref)
     else
       # update phrase for doc in collection
-      p 'checkpoint 3'
       users.set(session[:username], { 'phrase' => params[:phrase] })
     end
   end
