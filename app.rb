@@ -6,48 +6,60 @@ require 'orchestrate'
 require 'pry' if development?
 Bundler.require
 
-# require code
-require_relative 'lib/auth'
-require_relative 'lib/errors'
-# require_relative 'lib/helpers'
+enable :sessions
+
+use OmniAuth::Builder do
+  provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
+end
+
+# helper methods
+helpers do
+  # is the user logged_in?
+  def logged_in?
+    session[:authed]
+  end
+end
 
 # homepage
 get '/' do
-  erb :home
+  if logged_in?
+    redirect '/all'
+  else
+    erb :home
+  end
 end
 
-# submit your favorite phrase
-get '/input' do
-  erb :'401' unless admin?
-  erb :input
+# list all phrases
+get '/all' do
+  erb :all
 end
 
-# capture user input
-post '/input' do
-  # omnistrate code
+# submit new phrase
+get '/new' do
+  halt(401,'Not Authorized') unless logged_in?
+  erb :new
 end
 
-# view favorite phrase of others
-get '/input/:username' do
-  erb :'401' unless logged_in?
-  erb :input
+post '/new' do
+  # push user data to orchestrate
+  redirect '/all'
 end
 
-__END__
-@@layout
-<% title="Songs By Sinatra" %>
-<!doctype html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <header>
-      <h1><%= title %></h1>
-    </header>
-    <section>
-      <%= yield %>
-    </section>
-  </body>
-</html>
+get '/login' do
+  redirect to('/auth/twitter')
+end
+
+get '/logout' do
+  session[:authed] = nil
+  erb :out
+end
+
+get '/auth/twitter/callback' do
+  session[:authed] = true
+  session[:username] = env['omniauth.auth']['info']['name']
+  erb :in
+end
+
+get '/auth/failure' do
+  params[:message]
+end
