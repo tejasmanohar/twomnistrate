@@ -104,6 +104,7 @@ end
 get '/auth/twitter/callback' do
   # change session var to reflect login
   session[:authed] = true
+  # save twitter username from oauth2 response to session variable
   session[:username] = request.env['omniauth.auth']['info']['nickname']
   erb :in
 end
