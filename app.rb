@@ -47,10 +47,6 @@ post '/new' do
   redirect '/all', notice: 'The phrase was successfully submitted!'
 end
 
-get '/login' do
-  redirect to('/auth/twitter')
-end
-
 get '/logout' do
   session[:authed] = nil
   erb :out
