@@ -19,5 +19,5 @@
       "description": "orchestrate api key",
       "required": true
     }
-  },
+  }
 }
