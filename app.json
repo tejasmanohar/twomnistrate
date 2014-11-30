@@ -1,6 +1,6 @@
 {
   "name": "somnistrate",
-  "description": "example implementation of omniauth with orchestrate",
+  "description": "sinatra example implementation of omniauth with orchestrate",
   "repository": "https://github.com/tejas-manohar/somnistrate",
   "logo": "http://siliconflorist.com/wp-content/uploads/2013/05/Orchestrate.jpg",
   "keywords": ["ruby", "sinatra", "orchestrate", "omniauth", "twitter"],
