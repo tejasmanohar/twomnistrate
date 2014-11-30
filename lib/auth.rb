@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'omniauth-twitter'
-require 'helpers.rb'
+require_relative 'helpers'
 
 use OmniAuth::Builder do
   provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']

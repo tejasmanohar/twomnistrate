@@ -1,15 +1,15 @@
 # require gems
+require 'bundler/setup'
 require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'orchestrate'
 require 'pry' if development?
-require 'bundler'
 Bundler.require
 
 # require code
-require 'auth'
-require 'errors'
-require 'helpers'
+require_relative 'lib/auth'
+require_relative 'lib/errors'
+# require_relative 'lib/helpers'
 
 # homepage
 get '/' do
