@@ -37,7 +37,7 @@ end
 
 # helper methods
 helpers do
-  # check if user is logged_in via session var
+  # check if user is logged in via session var
   def logged_in?
     session[:authed]
   end
@@ -45,7 +45,7 @@ end
 
 # homepage
 get '/' do
-  # redirect to list if logged_in
+  # redirect to list if logged in
   if logged_in?
     redirect '/all'
   else

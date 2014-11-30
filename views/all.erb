@@ -1,4 +1,9 @@
 <p>You can look at all everyone's favorite phrases here!</p>
-<% if logged_in %>
-  <p>lol</p>
+
+<a href="/">Click here to go to the homepage</a><br>
+<% if logged_in? %>
+  <a href="/me">Click here to update your phrase</a><br>
+  <a href="/logout">... and logout here!</a>
+<% else %>
+  <a href="/auth/twitter">Click here to login with Twitter</a><br>
 <% end %>
