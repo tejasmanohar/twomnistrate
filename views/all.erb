@@ -1,4 +1,16 @@
 <p>You can look at all everyone's favorite phrases here!</p>
+<table border="1">
+  <tr>
+    <td>Username</td>
+    <td>Favorite Phrase</td>
+  </tr>
+  <% @data.each do |user| %>
+    <tr>
+      <td><%= user[0] %></td>
+      <td><%= user[1] %></td>
+    </tr>
+  <% end %>
+</table><br>
 <% if logged_in? %>
   <a href="/me">Click here to update your phrase</a><br>
   <a href="/logout">... and logout here!</a>

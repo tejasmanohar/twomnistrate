@@ -24,11 +24,14 @@ Bundler.require
 # set 'sessions' setting true
 enable :sessions
 
-# setup orchestrate client
-client = Orchestrate::Application.new(ENV['API_KEY'])
+# setup orchestrate application
+app = Orchestrate::Application.new(ENV['API_KEY'])
 
-# object within client for users collection
-users = client[:users]
+# set users to orchestrate collection
+users = app[:users]
+
+# create orchestrate method client
+client = Orchestrate::Client.new(ENV['API_KEY'])
 
 # setup omniauth with twitter oauth2 provider
 use OmniAuth::Builder do
@@ -55,6 +58,7 @@ end
 
 # list all users with their corresponding phrase
 get '/all' do
+  @data = users.map {|user| [user.key, user.value['phrase']]}
   erb :all
 end
 
@@ -72,16 +76,19 @@ post '/me' do
   # does user exists in collection
   if users[session[:username]].nil?
     # if user inputted text, create user doc in collection
-    users.create(users[session[:username]], { 'phrase' => params[:phrase] }) unless params[:phrase].nil?
+    p 'checkpoint 1'
+    users.create(session[:username], { 'phrase' => params[:phrase] }) unless params[:phrase].nil?
   else
-    if params[:phrase].nil?
+    if params[:phrase].empty?
       # save selected doc in users
-      doc = client.get(:users, users[session[:username]])
+      p 'checkpoint 2'
+      doc = client.get(:users, session[:username])
       # delete doc based on its ref in collection
-      client.delete(:users, users[session[:username]], doc.ref)
+      client.delete(:users, session[:username], doc.ref)
     else
       # update phrase for doc in collection
-      users.set(users[session[:username]], { 'phrase' => params[:phrase] })
+      p 'checkpoint 3'
+      users.set(session[:username], { 'phrase' => params[:phrase] })
     end
   end
   # send browser to phrase listings
