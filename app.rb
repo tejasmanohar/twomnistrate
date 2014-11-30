@@ -1,9 +1,19 @@
 # require gems
 require 'bundler/setup'
+
+# orchestrate client for ruby
 require 'orchestrate'
+
+# classy web-development dressed in a dsl
 require 'sinatra'
+
+# advanced code reloader for sinatra
 require 'sinatra/reloader' if development?
+
+# an irb alternative and runtime developer console
 require 'pry' if development?
+
+# require default group bundler
 Bundler.require
 
 # set 'sessions' setting true
