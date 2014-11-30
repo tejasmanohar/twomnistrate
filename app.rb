@@ -1,4 +1,4 @@
-# Sinatra example of OmniAuth Twitter with Orchestrate
+# Sinatra Example of OmniAuth Twitter with Orchestrate
 # Built by Tejas Manohar
 # Released under the Apache License 2.0 (apache.org/licenses/LICENSE-2.0.html)
 # Open source on GitHub: http://github.com/tejas-manohar/omnistrate
