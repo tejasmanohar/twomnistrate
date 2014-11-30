@@ -63,25 +63,25 @@ get '/me' do
   # stop user if they're not logged in
   halt(401,'Not Authorized') unless logged_in?
   # set user's current phrase to instance var so it's available in view
-  @phrase = users[:"#{session[:username]}"][:phrase] unless users[:"#{session[:username]}"].nil?
+  @phrase = users[session[:username]][:phrase] unless users[session[:username]].nil?
   erb :me
 end
 
 # capture user input
 post '/me' do
   # does user exists in collection
-  if users[:tejasmanohar].nil?
+  if users[session[:username]].nil?
     # if user inputted text, create user doc in collection
-    users.create(:"#{session[:username]}", { 'phrase' => params[:phrase] }) unless params[:phrase].nil?
+    users.create(users[session[:username]], { 'phrase' => params[:phrase] }) unless params[:phrase].nil?
   else
     if params[:phrase].nil?
       # save selected doc in users
-      doc = client.get(:users, :"#{session[:username]}")
+      doc = client.get(:users, users[session[:username]])
       # delete doc based on its ref in collection
-      client.delete(:users, :"#{session[:username]}", doc.ref)
+      client.delete(:users, users[session[:username]], doc.ref)
     else
       # update phrase for doc in collection
-      users.set(:"#{session[:username]}", { 'phrase' => params[:phrase] })
+      users.set(users[session[:username]], { 'phrase' => params[:phrase] })
     end
   end
   # send browser to phrase listings
