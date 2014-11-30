@@ -1,7 +1,7 @@
 <p>You can enter/update your favorite phrase here!</p>
-<form>
+<form method="post">
   <label>Phrase</label>
-  <input type="text" name="phrase">
+  <input type="text" name="phrase" value="<%= @phrase %>">
   <input type="submit" value="Submit">
 </form>
 <a href="/all">You can always click here to view favorite phrases</a><br>

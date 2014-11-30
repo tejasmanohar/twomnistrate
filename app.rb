@@ -62,12 +62,13 @@ end
 get '/new' do
   # stop user if they're not logged in
   halt(401,'Not Authorized') unless logged_in?
+  p phrases[:tejasmanohar]
+  @phrase = phrases[:tejasmanohar][:phrase] unless phrases[:tejasmanohar].nil?
   erb :new
 end
 
 # capture user input
 post '/new' do
-  # push user data to orchestrate here
   redirect '/all'
 end
 
@@ -82,6 +83,7 @@ end
 get '/auth/twitter/callback' do
   # change session var to reflect login
   session[:authed] = true
+  session[:username] = request.env['omniauth.auth']['info']['nickname']
   erb :in
 end
 
