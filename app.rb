@@ -25,10 +25,10 @@ Bundler.require
 enable :sessions
 
 # setup orchestrate client
-app = Orchestrate::Application.new(ENV['API_KEY'])
+client = Orchestrate::Application.new(ENV['API_KEY'])
 
-# object within client for phrases collection
-phrases = app[:phrases]
+# object within client for users collection
+users = client[:users]
 
 # setup omniauth with twitter oauth2 provider
 use OmniAuth::Builder do
@@ -53,22 +53,38 @@ get '/' do
   end
 end
 
-# list all phrases
+# list all users with their corresponding phrase
 get '/all' do
   erb :all
 end
 
 # submit new phrase
-get '/new' do
+get '/me' do
   # stop user if they're not logged in
   halt(401,'Not Authorized') unless logged_in?
-  p phrases[:tejasmanohar]
-  @phrase = phrases[:tejasmanohar][:phrase] unless phrases[:tejasmanohar].nil?
-  erb :new
+  # set user's current phrase to instance var so it's available in view
+  @phrase = users[:"#{session[:username]}"][:phrase] unless users[:"#{session[:username]}"].nil?
+  erb :me
 end
 
 # capture user input
-post '/new' do
+post '/me' do
+  # does user exists in collection
+  if users[:tejasmanohar].nil?
+    # if user inputted text, create user doc in collection
+    users.create(:"#{session[:username]}", { 'phrase' => params[:phrase] }) unless params[:phrase].nil?
+  else
+    if params[:phrase].nil?
+      # save selected doc in users
+      doc = client.get(:users, :"#{session[:username]}")
+      # delete doc based on its ref in collection
+      client.delete(:users, :"#{session[:username]}", doc.ref)
+    else
+      # update phrase for doc in collection
+      users.set(:"#{session[:username]}", { 'phrase' => params[:phrase] })
+    end
+  end
+  # send browser to phrase listings
   redirect '/all'
 end
 
