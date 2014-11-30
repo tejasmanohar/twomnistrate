@@ -50,10 +50,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
-  omniauth
-  omniauth-twitter
-  orchestrate
-  pry
-  sinatra
-  sinatra-contrib
+  bundler (= 1.7.7)
+  omniauth (= 1.2.2)
+  omniauth-twitter (= 1.1.0)
+  orchestrate (= 0.9.2)
+  pry (= 0.10.1)
+  sinatra (= 1.4.5)
+  sinatra-contrib (= 1.4.2)
