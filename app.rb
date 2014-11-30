@@ -1,8 +1,10 @@
 # require gems
 require 'bundler/setup'
-require 'sinatra'
-require 'sinatra/reloader' if development?
 require 'orchestrate'
+require 'sinatra'
+require 'sinatra/flash'
+require 'sinatra-redirect-with-flash'
+require 'sinatra/reloader' if development?
 require 'pry' if development?
 Bundler.require
 
@@ -42,7 +44,7 @@ end
 
 post '/new' do
   # push user data to orchestrate
-  redirect '/all'
+  redirect '/all', notice: 'The phrase was successfully submitted!'
 end
 
 get '/login' do
