@@ -7,6 +7,5 @@ gem 'omniauth-twitter'
 gem 'orchestrate'
 gem 'sinatra'
 gem 'sinatra-contrib'
-gem 'sinatra-redirect-with-flash'
 
 gem 'pry', :group => [:development]

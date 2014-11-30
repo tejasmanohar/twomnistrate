@@ -2,13 +2,13 @@
 require 'bundler/setup'
 require 'orchestrate'
 require 'sinatra'
-require 'sinatra/flash'
-require 'sinatra-redirect-with-flash'
 require 'sinatra/reloader' if development?
 require 'pry' if development?
 Bundler.require
 
 enable :sessions
+
+app = Orchestrate::Application.new(ENV['API_KEY'])
 
 use OmniAuth::Builder do
   provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']

@@ -14,6 +14,10 @@
     "CONSUMER_SECRET": {
       "description": "twitter secret api key",
       "required": true
+    },
+    "API_KEY": {
+      "description": "orchestrate api key",
+      "required": true
     }
   },
 }
