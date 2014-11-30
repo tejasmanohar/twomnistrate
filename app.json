@@ -1,11 +1,11 @@
 {
-  "name": "omnistrate",
+  "name": "somnistrate",
   "description": "example implementation of omniauth with orchestrate",
-  "repository": "https://github.com/tejas-manohar/omnistrate",
+  "repository": "https://github.com/tejas-manohar/somnistrate",
   "logo": "http://siliconflorist.com/wp-content/uploads/2013/05/Orchestrate.jpg",
   "keywords": ["ruby", "sinatra", "orchestrate", "omniauth", "twitter"],
-  "website": "http://omnistrate.herokuapp.com",
-  "repository": "http://github.com/tejas-manohar/omnistrate",
+  "website": "http://somnistrate.herokuapp.com",
+  "repository": "http://github.com/tejas-manohar/somnistrate",
   "env": {
     "CONSUMER_KEY": {
       "description": "twitter public key to generate auth url",
