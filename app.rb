@@ -89,7 +89,7 @@ post '/me' do
       users.set(session[:username], { 'phrase' => params[:phrase] })
     end
   end
-  # send browser to phrase listings
+  # send browser to list of users and their phrase
   redirect '/all'
 end
 
