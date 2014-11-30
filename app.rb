@@ -3,7 +3,9 @@
 # Released under the Apache License 2.0 (apache.org/licenses/LICENSE-2.0.html)
 # Open source on GitHub: http://github.com/tejas-manohar/omnistrate
 
-# require gems
+### require gems
+
+# manage your application's gem dependencies with less pain
 require 'bundler/setup'
 
 # orchestrate client for ruby
@@ -12,17 +14,26 @@ require 'orchestrate'
 # classy web-development dressed in a dsl
 require 'sinatra'
 
-# advanced code reloader for sinatra
-require 'sinatra/reloader' if development?
-
-# an irb alternative and runtime developer console
-require 'pry' if development?
-
 # require default group bundler
 Bundler.require
 
+
+# require certain gems only in dev env
+configure :development do
+  # advanced code reloader for sinatra
+  require 'sinatra/reloader'
+  # an irb alternative and runtime developer console
+  require 'pry'
+end
+
+
+### sinatra settings
+
 # set 'sessions' setting true
 enable :sessions
+
+
+### configure api clients
 
 # setup orchestrate application
 app = Orchestrate::Application.new(ENV['API_KEY'])
@@ -38,13 +49,18 @@ use OmniAuth::Builder do
   provider :twitter, ENV['CONSUMER_KEY'], ENV['CONSUMER_SECRET']
 end
 
-# helper methods
+
+### helper methods
+
 helpers do
   # check if user is logged in via session var
   def logged_in?
     session[:authed]
   end
 end
+
+
+### routes
 
 # homepage
 get '/' do
