@@ -58,6 +58,7 @@ end
 
 # list all users with their corresponding phrase
 get '/all' do
+  # enumerates over all users to build array of [username, phrase]'s
   @data = users.map {|user| [user.key, user.value['phrase']]}
   erb :all
 end
