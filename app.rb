@@ -28,10 +28,11 @@ end
 
 ### sinatra settings
 
-# set 'sessions' setting true
 configure do
+  # set 'sessions' setting true
   enable :sessions
 end
+
 
 ### configure api clients
 
