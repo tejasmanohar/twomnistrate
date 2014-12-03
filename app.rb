@@ -17,7 +17,6 @@ require 'sinatra'
 # require default group bundler
 Bundler.require
 
-
 # require certain gems only in dev env
 configure :development do
   # advanced code reloader for sinatra
@@ -30,8 +29,9 @@ end
 ### sinatra settings
 
 # set 'sessions' setting true
-enable :sessions
-
+configure do
+  enable :sessions
+end
 
 ### configure api clients
 
@@ -93,7 +93,7 @@ post '/me' do
   # does user exists in collection
   if users[session[:username]].nil?
     # if user inputted text, create user doc in collection
-    users.create(session[:username], { 'phrase' => params[:phrase] }) unless params[:phrase].nil?
+    users.create(session[:username], { 'phrase' => params[:phrase] }) unless params[:phrase].empty?
   else
     if params[:phrase].empty?
       # save selected doc in users
@@ -105,7 +105,7 @@ post '/me' do
       users.set(session[:username], { 'phrase' => params[:phrase] })
     end
   end
-  # send browser to list of users and their phrase
+  # send browser to phrase listings
   redirect '/all'
 end
 
@@ -120,7 +120,6 @@ end
 get '/auth/twitter/callback' do
   # change session var to reflect login
   session[:authed] = true
-  # save twitter username from oauth2 response to session variable
   session[:username] = request.env['omniauth.auth']['info']['nickname']
   erb :in
 end
