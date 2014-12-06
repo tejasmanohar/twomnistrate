@@ -1,8 +1,9 @@
+<h1 class="page-header">Edit Phrase</h1>
 <p>You can enter/update your favorite phrase here!</p>
-<form method="post">
-  <label>Phrase</label>
-  <input type="text" name="phrase" value="<%= @phrase %>">
-  <input type="submit" value="Submit">
+<form method="post" role="form">
+  <div class="form-group">
+    <label>Phrase</label>
+    <input type="text" name="phrase" value="<%= @phrase %>" class="form-control">
+  </div>
+  <input type="submit" value="Submit" class="btn btn-default">
 </form>
-<a href="/all">You can always click here to view favorite phrases</a><br>
-<a href="/logout">... and logout here!</a>

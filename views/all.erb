@@ -1,8 +1,9 @@
+<h1 class="page-header">Favorite Phrases</h1>
 <p>You can look at all everyone's favorite phrases here!</p>
-<table border="1">
+<table class="table table-striped">
   <tr>
-    <td>Username</td>
-    <td>Favorite Phrase</td>
+    <th>Username</th>
+    <th>Favorite Phrase</th>
   </tr>
   <% @data.each do |user| %>
     <tr>
@@ -12,9 +13,7 @@
   <% end %>
 </table><br>
 <% if logged_in? %>
-  <a href="/me">Click here to update your phrase</a><br>
-  <a href="/logout">... and logout here!</a>
+  <a href="/me" class="btn btn-primary">Update your phrase</a><br>
 <% else %>
-  <a href="/">Click here to go to the homepage</a><br>
-  <a href="/auth/twitter">Click here to login with Twitter</a><br>
+  <p><a href="/auth/twitter">Login</a> to edit your phrase.</a>
 <% end %>
