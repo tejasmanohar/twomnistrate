@@ -1,11 +1,11 @@
 {
   "name": "twomnistrate",
   "description": "sinatra example implementation of omniauth twitter with orchestrate",
-  "repository": "https://github.com/tejas-manohar/twomnistrate",
+  "repository": "https://github.com/tejasmanohar/twomnistrate",
   "logo": "http://siliconflorist.com/wp-content/uploads/2013/05/Orchestrate.jpg",
   "keywords": ["ruby", "sinatra", "orchestrate", "omniauth", "twitter"],
   "website": "http://twomnistrate.herokuapp.com",
-  "repository": "http://github.com/tejas-manohar/twomnistrate",
+  "repository": "http://github.com/tejasmanohar/twomnistrate",
   "env": {
     "CONSUMER_KEY": {
       "description": "twitter public key to generate auth url",
